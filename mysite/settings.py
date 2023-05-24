@@ -57,7 +57,11 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+    "django-server-production-7928.up.railway.app",
+    "https://links.vnctkevin.me",
+]
 
 ROOT_URLCONF = 'mysite.urls'
 
