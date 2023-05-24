@@ -1,15 +1,30 @@
 <!DOCTYPE html>
+
+{% load static %}
+
 <html>
 <head>
     <meta charset="utf-8">
-    <title>VK Link Shortener</title>
+    <title>K-Link Shortener</title>
+    <link rel="stylesheet" href="{% static 'css/forms.css' %}" />
 </head>
 <body>
-    <h1>VK Link Shortener</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Shorten">
-    </form>
+    <div class="button-div">
+        <h1>K-Link Shortener</h1>
+        <p>Shorten your links with K-Link</p>
+
+        {%if not shortUrl%}
+            <form class="form" action="" method="POST">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <input type="submit" value="Submit" class="button">
+            </form>
+          </div>
+        {%else%}
+          <div class="result">
+            <p>Shortened Link: <a href="{{ shortUrl }}">{{ shortUrl }}</a></p>
+          </div>
+        {%endif%}
+    
 </body>
 </html>

@@ -1,0 +1,52 @@
+/* <!-- 
+Code is taken and modified from
+https://www.w3schools.com/css/tryit.asp?filename=trycss_table_fancy
+https://www.w3schools.com/css/css_table.asp
+--> */
+
+
+#notes {
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+  /* Takes the sub tag of customer td and th and apply the style */
+#notes td, #notes th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+  
+  /* for every tr which is a child of customers, if its defined on even order, set a different bg color */
+#notes tr:nth-child(even){
+    background-color: #c7c7c7;
+}
+  
+  /* for every tr which is a child of customer, if hovered, change bg color */
+#notes tr:hover {
+    background-color: #ddd;
+}
+  
+  /* eventhough above already has th, this will override or add to it */
+  /* extra note, padding is distance between element within with the container border */
+#notes th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #5EA9BE;
+    color: white;
+}
+
+.notes-container {
+  display: flex;
+  justify-content: center;
+  margin: 0rem 3rem 3rem 3rem;
+}
+
+.table {
+  background-color: #04AA6D
+}
+
+body {
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+}

@@ -1,0 +1,42 @@
+.notes-list {
+    background-color: #1d60dd
+  }
+  
+body {
+    font-family: "Open Sans", sans-serif;
+    margin: 0;
+}
+
+.card-container {
+    margin: 0rem 2rem 1rem 2rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    width: 98%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.card-header {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #554cdb;
+    color: white;
+    border-radius: 5px;
+    padding: 0px 20px;
+}
+
+.card-content {
+    padding: 1rem;
+}
+
+.card:hover {
+    box-shadow: 0 10px 16px 0 rgba(49, 42, 42, 0.2);
+  }
