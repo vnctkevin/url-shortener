@@ -30,7 +30,7 @@ ALLOWED_HOSTS = ["*"]
 
 # FORM SUBMISSION
 # Comment out the following line and place your railway URL, and your production URL in the array.
-CSRF_TRUSTED_ORIGINS = ["https://links.vnctkevin.me", "django-server-production-7928.up.railway.app"]
+CSRF_TRUSTED_ORIGINS = ["https://links.vnctkevin.me", "https://django-server-production-7928.up.railway.app"]
 
 # Application definition
 
@@ -42,13 +42,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'url',
-    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -57,11 +55,7 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
-CORS_TRUSTED_ORIGINS = [
-    "http://localhost:3000",
-    "django-server-production-7928.up.railway.app",
-    "https://links.vnctkevin.me",
-]
+
 
 ROOT_URLCONF = 'mysite.urls'
 
