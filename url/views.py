@@ -9,7 +9,7 @@ def shorten_link(request):
     form = LinkForm(request.POST or None)
     if form.is_valid():
         form.save()
-        return HttpResponse('Link shortened successfully')
+        return render(request, 'index.html', {'form': form, 'shortUrl': form.cleaned_data['shortUrl']})
     context = {
         'form': form
     }
