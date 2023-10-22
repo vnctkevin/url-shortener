@@ -22,7 +22,8 @@
           </div>
         {%else%}
           <div class="result">
-            <p>Shortened Link: <a href="{{ shortUrl }}">{{ shortUrl }}</a></p>
+            <h2>Here is your shortened link:</h2>
+            <a href="{{shortUrl}}"> {{request.get_host}}{{shortUrl}}</a>
           </div>
         {%endif%}
     
