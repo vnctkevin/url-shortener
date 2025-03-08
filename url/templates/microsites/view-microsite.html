@@ -1,0 +1,18 @@
+<!-- your_app/templates/microsites/view_microsite.html -->
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>{{ microsite.name }}</h2>
+  <div>{{ microsite.description|martor }}</div>
+  <div>{{ microsite.content|martor }}</div>
+  <h3>Links</h3>
+  <ul>
+    {% for link in microsite.links.all %}
+      <li><a href="{{ link.longUrl }}">{{ link.shortUrl }}</a> ({{ link.clicks }} clicks)</li>
+    {% endfor %}
+  </ul>
+  {% if user == microsite.user %}
+    <a href="{% url 'edit_microsite' microsite.pk %}">Edit</a>
+    <a href="{% url 'delete_microsite' microsite.pk %}">Delete</a>
+  {% endif %}
+{% endblock %}

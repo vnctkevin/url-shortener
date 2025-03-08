@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load martortags %}
+{% load static %}
+
+{% block css %}
+  <!-- Load Tailwind first to allow Martor overrides -->
+  <link href="{% static 'martor/css/martor.bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'plugins/css/ace.min.css' %}" rel="stylesheet">
+  <link href="{% static 'plugins/css/resizable.min.css' %}" rel="stylesheet">
+  <style>
+    /* Fix conflicting styles */
+    .martor-container pre {
+      @apply bg-gray-100 p-4 rounded-md overflow-x-auto;
+    }
+    .martor-container .btn-toolbar {
+      @apply gap-2;
+    }
+    .martor-container .martor-preview {
+      @apply prose max-w-none;
+    }
+    .martor-container .martor-preview pre {
+      @apply bg-gray-100 p-4 rounded-md overflow-x-auto;
+    }
+    .martor-container .martor-preview code {
+        @apply text-sm bg-gray-100 px-1 py-0.5 rounded;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6">
+  <h2 class="text-2xl font-semibold text-gray-800 mb-4">Create Microsite</h2>
+  <form method="post" class="space-y-6">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    {% for field in form %}
+      <div class="space-y-2">
+        <label class="block text-sm font-medium text-gray-700">{{ field.label_tag }}</label>
+        
+        {% if field.name == 'content' %}
+          <div class="martor-container border rounded-lg overflow-hidden">
+            {{ field }}
+          </div>
+        {% else %}
+          {{ field }}
+        {% endif %}
+
+        {% if field.errors %}
+          <div class="text-red-500 text-sm">{{ field.errors }}</div>
+        {% endif %}
+      </div>
+    {% endfor %}
+
+    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition-colors">
+      Create
+    </button>
+  </form>
+</div>
+{% endblock %}
+
+{% block js %}
+  <!-- Load dependencies in correct order -->
+  <script src="{% static 'plugins/js/jquery.min.js' %}"></script>
+  <script src="{% static 'plugins/js/ace.js' %}"></script>
+  <script src="{% static 'plugins/js/mode-markdown.js' %}"></script>
+  <script src="{% static 'plugins/js/ext-language_tools.js' %}"></script>
+  <script src="{% static 'plugins/js/theme-github.js' %}"></script>
+  <script src="{% static 'plugins/js/typo.js' %}"></script>
+  <script src="{% static 'plugins/js/spellcheck.js' %}"></script>
+  <script src="{% static 'plugins/js/highlight.min.js' %}"></script>
+  <script src="{% static 'plugins/js/resizable.min.js' %}"></script>
+  <script src="{% static 'plugins/js/emojis.min.js' %}"></script>
+  <script src="{% static 'martor/js/martor.bootstrap.min.js' %}"></script>
+  
+  <!-- Initialize Martor -->
+  <script>
+    $(document).ready(function() {
+      $('.martor-container').martor({
+        uploads_url: '{% url "martor_uploader" %}',  // Update with your upload URL
+        editor_config: {
+          placeholder: 'Write your content here...',
+          toolbar: ['bold', 'italic', 'heading', '|', 'quote', 'unordered-list', 
+                   'ordered-list', '|', 'link', 'image', 'emoji', '|', 'preview']
+        }
+      });
+    });
+  </script>
+{% endblock %}

@@ -145,7 +145,25 @@ LOGIN_URL = 'login'
 
 MARTOR_THEME = 'bootstrap'  # Theme options: 'bootstrap', 'semantic'
 MARTOR_ENABLE_CONFIGS = {
-    'imgur': 'true',     # Enable/disable imgur/custom uploader.
-    'mention': 'false',  # Enable/disable mention
-    'jquery': 'true',    # Include/exclude jquery (required for admin default django)
+    'emoji': 'true',        # to enable/disable emoji icons.
+    'imgur': 'true',        # to enable/disable imgur/custom uploader.
+    'mention': 'false',     # to enable/disable mention
+    'jquery': 'true',       # to include/revoke jquery (require for admin default django)
+    'living': 'false',      # to enable/disable live updates in preview
+    'spellcheck': 'false',  # to enable/disable spellcheck in form textareas
+    'hljs': 'true',         # to enable/disable hljs highlighting in preview
 }
+
+# To show the toolbar buttons
+MARTOR_TOOLBAR_BUTTONS = [
+    'bold', 'italic', 'horizontal', 'heading', 'pre-code',
+    'blockquote', 'unordered-list', 'ordered-list',
+    'link', 'image-link', 'image-upload', 'emoji',
+    'direct-mention', 'toggle-maximize', 'help'
+]
+
+# To setup the martor editor with title label or not (default is False)
+MARTOR_ENABLE_LABEL = False
+
+# Disable admin style when using custom admin interface e.g django-grappelli (default is True)
+MARTOR_ENABLE_ADMIN_CSS = True

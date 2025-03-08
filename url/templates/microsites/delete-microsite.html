@@ -1,0 +1,12 @@
+<!-- your_app/templates/microsites/delete_microsite.html -->
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Delete Microsite</h2>
+  <p>Are you sure you want to delete "{{ microsite.name }}"?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, delete</button>
+    <a href="{% url 'dashboard' %}">Cancel</a>
+  </form>
+{% endblock %}
