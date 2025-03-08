@@ -14,7 +14,7 @@ def dashboard(request):
         'links': user_links,
         'microsites': user_microsites
     }
-    return render(request, 'dashboard.html', context)
+    return render(request, 'index.html', context)
 
 def register(request):
     if request.method == 'POST':
@@ -38,7 +38,7 @@ def shorten_link(request):
     context = {
         'form': form
     }
-    return render(request, 'index.html', context)
+    return render(request, 'create-link.html', context)
 
 def redirect_link(request, shortUrl):
     try:

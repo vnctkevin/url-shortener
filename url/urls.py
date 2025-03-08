@@ -3,7 +3,8 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('', shorten_link, name='home'),
+    path('', dashboard, name='home'),
+    path('create-link/', shorten_link, name='create-link'),
     path('dashboard/', dashboard, name='dashboard'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('register/', register, name='register'),

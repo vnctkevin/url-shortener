@@ -7,7 +7,8 @@ class LinkForm(forms.ModelForm):
         model = Link
         fields = ['longUrl', 'shortUrl']
         labels = {
-            'longUrl': 'URL to shorten'
+            'longUrl': 'URL to shorten',
+            'shortUrl': 'New Short URL'
         }
         widgets = {
             'longUrl': forms.URLInput(attrs={'class': 'form-control'})
