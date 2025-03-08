@@ -1,31 +1,70 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
 
-{% load static %}
+{% block content %}
+<div class="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg">
+    <div class="text-center mb-8">
+        <h1 class="text-4xl font-bold text-gray-800 mb-2">Link Shortener</h1>
+        <p class="text-gray-600">Transform your long URLs into short, memorable links</p>
+    </div>
 
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>K-Link Shortener</title>
-    <link rel="stylesheet" href="{% static 'css/forms.css' %}" />
-</head>
-<body>
-    <div class="button-div">
-        <h1>K-Link Shortener</h1>
-        <p>Shorten your links with K-Link</p>
+    {% if not shortUrl %}
+        <form class="space-y-4" method="POST">
+            {% csrf_token %}
+            <div class="flex flex-col gap-2">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" 
+                    class="w-full py-3 px-4 bg-blue-600 text-white font-semibold rounded-lg
+                           hover:bg-blue-700 transition duration-200 ease-in-out
+                           focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                Shorten Link
+            </button>
+        </form>
+    {% else %}
+        <div class="bg-gray-50 rounded-lg p-6 text-center">
+            <h2 class="text-xl font-semibold text-gray-700 mb-4">Your shortened link is ready!</h2>
+            <div class="flex items-center justify-center gap-2">
+                <input type="text" 
+                       value="{{request.get_host}}/{{shortUrl}}" 
+                       class="flex-1 p-3 border rounded-lg bg-white text-gray-700"
+                       readonly
+                       id="shortUrl">
+                <button onclick="copyToClipboard()" 
+                        class="px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700
+                               transition duration-200 ease-in-out">
+                    Copy
+                </button>
+            </div>
+            <a href="{{shortUrl}}" 
+               class="mt-4 inline-block text-blue-600 hover:text-blue-800 hover:underline">
+                Visit shortened link
+            </a>
+        </div>
+        <div class="mt-6 text-center">
+            <a href="{% url 'shorten' %}" 
+               class="text-blue-600 hover:text-blue-800 hover:underline">
+                Shorten another link
+            </a>
+        </div>
+    {% endif %}
+</div>
 
-        {%if not shortUrl%}
-            <form class="form" action="" method="POST">
-              {% csrf_token %}
-              {{ form.as_p }}
-              <input type="submit" value="Submit" class="button">
-            </form>
-          </div>
-        {%else%}
-          <div class="result">
-            <h2>Here is your shortened link:</h2>
-            <a href="{{shortUrl}}"> {{request.get_host}}/{{shortUrl}}</a>
-          </div>
-        {%endif%}
+<script>
+function copyToClipboard() {
+    const urlInput = document.getElementById('shortUrl');
+    urlInput.select();
+    document.execCommand('copy');
     
-</body>
-</html>
+    // Optional: Show feedback
+    const button = event.target;
+    const originalText = button.textContent;
+    button.textContent = 'Copied!';
+    button.classList.replace('bg-green-600', 'bg-gray-600');
+    
+    setTimeout(() => {
+        button.textContent = originalText;
+        button.classList.replace('bg-gray-600', 'bg-green-600');
+    }, 2000);
+}
+</script>
+{% endblock %}

@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'url',
+    'martor'
 ]
 
 MIDDLEWARE = [
@@ -135,3 +138,14 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = 'dashboard'
+LOGOUT_REDIRECT_URL = 'home'
+LOGIN_URL = 'login'
+
+MARTOR_THEME = 'bootstrap'  # Theme options: 'bootstrap', 'semantic'
+MARTOR_ENABLE_CONFIGS = {
+    'imgur': 'true',     # Enable/disable imgur/custom uploader.
+    'mention': 'false',  # Enable/disable mention
+    'jquery': 'true',    # Include/exclude jquery (required for admin default django)
+}
